@@ -1,6 +1,6 @@
 # Project Java
 
-Programme de gestion d'une Banque
+Programme de Gestion d'une Banque
 
 ## Préréquis
 
@@ -9,7 +9,7 @@ Le code de gestion est séparer en trois modules distincts:
 * Le `testframework` pour tester le code;
 * Le `banking` qui contient toues les méthodes de gestion de la banque;
 
-### Prerequisites
+## `Module Logger`
 
 What things you need to install the software and how to install them
 
