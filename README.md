@@ -271,5 +271,7 @@ Les problèmes essentiels se sont surtout présentés au niveau de l'élaboratio
 
 ### Enseignant : Loïc LeDoyen
 ### Binôme
-    * TCHUENBOU KOMGUEP Gabrielle-Renée
-    * FOGNO'O BOPDA Ulrich Ivanick
+```
+   TCHUENBOU KOMGUEP Gabrielle-Renée
+   FOGNO'O BOPDA Ulrich Ivanick
+```
