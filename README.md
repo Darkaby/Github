@@ -163,15 +163,6 @@ public void getListOfOperation()
 ### ChoiceAccount
 
 Afin de ne pas trop encombrer notre fonction main, on a créé cette classe qui affiche la liste d'actions que le client peut effectuer. Elle réapparaîtra à chaque fois que l'utilisateur aura terminé une action.
-```java
-public void setListOfOperation(Operation operation)
-public void getListOfOperation()
-```
-
-
-### And coding style tests
-
-Explain what these tests test and why
 
 ```java
 public class ChoiceAction {
@@ -196,36 +187,89 @@ public class ChoiceAction {
 }
 ```
 
-## Deployment
+### Bank
 
-Add additional notes about how to deploy this on a live system
+Cette classe contient notre fonction main. La séquence d'action est effectuée comme suit:
+* Ouverture du programme et création d'un nouveau compte (nom, prénom, âge et solde);
+* Affichage de la liste d'actions et choix d'action du client;
+* Affichage de la liste des comptes et choix du compte du client;
+* En fonction du choix d'action de l'utilisateur définit par la classe `ChoiceAccount`, on appelle les classes et méthodes correspondantes;
+* Lorsque l'utilisateur quitte sa session, il a la possibilité d'en démarrer une nouvelle lui-même ou de laisser la place à un autre utilisateur, ou il peut quiter définitivement le programme.
 
-## Built With
+```java
+private static CurrentAccount ChooseAccount(){
+        compositeLogger.info("OUTPUT","Choisir un compte: ");
+        clientAccount.getListOfAccountToString();
+        AtomicInteger choiceAccount = new AtomicInteger(scan.nextInt());
+        compositeLogger.info("INPUT", "Choix de compte: "+ choiceAccount.get());
+        return clientAccount.getAccount(choiceAccount.get());
+    }
+```
+Cette méthode affiche la liste des comptes du client pour qu'il puisse faire un choix sur la suite des opérations.
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+Nous avons définit trois autres méthodes plus bas permettant de demander à l'utilisateur d'entrer une valeur, puis de la lire et de l'enregistrer. Elles ne diffèrent qu'en fonction de la nature de l'entrée, selon que ce soit une chaîne de caractères, un integer, ou un double.
+```java
+private static String printString(String ouput)
+private static int printInt(String ouput)
+private static double printDouble(String ouput)
+```
 
-## Contributing
+Par exemple, pour un integer, on a:
+```java
+private static int printInt(String ouput){
+        int Int;
+        compositeLogger.info("OUTPUT", ouput);
+        Int = scan.nextInt();
+        compositeLogger.info("INPUT", ""+Int);
+        return Int;
+    }
+```
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+### BankTest
 
-## Versioning
+Cette classe implémente des tests sur certaines des méthodes définies afin de vérifier que le programme fonctionne.
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+## Module Testframework
 
-## Authors
+Il ne contient qu'une seule et unique classe: `RunTest`. Cette dernière contient une fonction main qui exécutera la classe `BankTest`. Elle gère les exceptions, détermine le nombre de tests réussis et de tests échoués, et calcule leur pourcentage selon le nombre de tests total.
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+## Fichiers .sh
 
-## License
+Nous avons créer 3 fichiers `.sh` permettant de compiler et d'exécuter notre projet:
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+* `compile.sh`: compile tous les fichiers `.java` de notre projetet les stocke dans un dossier `bin` unique à chaque module;
+```java
+rm -rf logger/bin
+mkdir logger/bin
+javac -d logger/bin $(find logger/src -name *.java)
 
-## Acknowledgments
+rm -rf banking/bin
+mkdir banking/bin
+javac -classpath logger/bin -d banking/bin $(find banking/src -name *.java)
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+rm -rf testframework/bin
+mkdir testframework/bin
+javac -classpath logger/bin:banking/bin -d testframework/bin $(find testframework/src -name *.java)
+```
+
+* `launch_banking.sh`: exécute la classe main du module `Banking`;
+```java
+java -classpath logger/bin:banking/bin banking.Bank
+````
+
+* `test.sh`: exécute la classe main du module `Testframework`.
+```java
+java -classpath logger/bin:banking/bin:testframework/bin test.RunTest banking.BankTest
+````
+
+## Difficultés rencontrées
+
+Les problèmes essentiels se sont surtout présentés au niveau de l'élaboration du `Logger` et du `Testframework`. La mauvaise compréhension du sujet et les mises à jour presque régulières de l'enseignant ont ralentit l'avancée du projet. Cependant, nous avons atteint nos objectifs et suggérons, pour l'amélioration du programme, d'intégrer une base de données pour sauvegarder les opérations des clients, ainsi qu'une interface graphique.
+
+## Acteurs du Projet
+
+### Enseignant : Loïc LeDoyen
+### Binôme
+    * TCHUENBOU KOMGUEP Gabrielle-Renée
+    * FOGNO'O BOPDA Ulrich Ivanick
