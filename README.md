@@ -56,6 +56,9 @@ public static Logger getLogger(FileLogger fileLogger, ContextualLogger contextua
 
 ## Module Banking
 
+Dans chaque classe du module `Banking`, on déclarera un `Logger` et un `CompositeLogger` qui nous permettra de préciser dans le fichier logger, de quelle classe provient le message.
+
+
 ### Interface Account
 
 ```java
@@ -114,14 +117,83 @@ La classe `Loaning` permet de définir les paramètres d'un prêt, de le calcule
 
 Une opération ici est definit comme une action sur un compte pouvant être un retrait ou un dépôt. Elle a 3 paramètres:
 
-* 
+* `Origins`: Origine de l'opération: si le client le fait lui-même, le type est `Inconnu` et dans le cas d'un transfert, précise vers quel compte est déposé ou de quel compte provient l'argent;
+* `NameOperation`: Retrait ou Dépôt;
+* `Amount`: Montant déposer ou retirer.
+
+### CurrentAccount
+
+A chaque compte courant, est associé un solde, un client, une liste d'opérations et une liste de crédits.
+```java
+private double balance;
+private double firstbalance;
+private ClientAccount clientAccount;
+private ArrayList<Loaning> listOfLoaning = new ArrayList<>();
+private ArrayList<Operation> listOfOperation = new ArrayList<>();
+```
+
+Lors de l'affichage de la liste des opérations, la variable `firstbalance` correspond au premier solde du compte client, soit à sa création. On l'affiche au début de la liste, et le montant actuel à la fin. Cela permet au client de pouvoir juger plus facilement les opérations qu'il a effectué sur son compte en banque.
+
+Nous avons implémenté les méthodes suivantes:
+* Dépôt: ilest défendu de déposer un montant négatif
+```java
+public void deposit(double amount)
+```
+
+* Retrait: on ne peut retirer un montant négatif, ni un montant supérieur à celui du solde du compte;
+```java
+public void withdrawal(double amount)
+```
+
+* Création de la liste de crédits: on ajoute `loaning` à la liste seulement si sa taille est inférieure à 2, et bien sûr en considérant la restriction sur l'âge dont nous avons parlé tantôt;
+```java
+public void setListOfLoaning(Loaning loaning)
+```
+
+* Affichage de la liste de prêts
+```java
+public void getListOfLoaningToString()
+```
+
+* Création et Affichage de la liste d'opérations
+```java
+public void setListOfOperation(Operation operation)
+public void getListOfOperation()
+```
+### ChoiceAccount
+
+Afin de ne pas trop encombrer notre fonction main, on a créé cette classe qui affiche la liste d'actions que le client peut effectuer. Elle réapparaîtra à chaque fois que l'utilisateur aura terminé une action.
+```java
+public void setListOfOperation(Operation operation)
+public void getListOfOperation()
+```
+
 
 ### And coding style tests
 
 Explain what these tests test and why
 
-```
-Give an example
+```java
+public class ChoiceAction {
+
+    private Logger logger;
+    private CompositeLogger compositeLogger = (CompositeLogger) LoggerFactory.getLogger(new FileLogger("D:/Documents/ESIEA/ProjetJava/Bank/FileLogger.txt"),
+            new ContextualLogger(logger, "ChoiceAction"));
+
+    @Override
+    public String toString() {
+        return "Liste des actions:\n" +
+                "1 : Faire un dépôt; \n" +
+                "2 : Faire un retrait; \n" +
+                "3 : Demander un crédit; \n" +
+                "4 : Consulter le solde; \n" +
+                "5 : Voir la liste des opérations et consulter le solde; \n" +
+                "6 : Voir la liste des crédits; \n" +
+                "7 : Ouvrir un autre compte; \n" +
+                "8 : Faire un transfert; \n" +
+                "9 : Quitter la session.\n";
+    }
+}
 ```
 
 ## Deployment
