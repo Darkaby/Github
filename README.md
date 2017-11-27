@@ -54,29 +54,27 @@ public static Logger getLogger(FileLogger fileLogger, ContextualLogger contextua
     }
 ```
 
-### Installing
+## Module Banking
 
-A step by step series of examples that tell you have to get a development env running
+### Interface Account
 
-Say what the step will be
-
+```java
+void transfert(CurrentAccount debitAccount, CurrentAccount creditAccount, double amount);
+void getListOfAccountToString();
+void setListOfAccount(CurrentAccount account);
+void deposit(double amount);
+void withdrawal (double amount);
+void setListOfLoaning(Loaning loaning);
+void getListOfLoaningToString();
+void getListOfOperation();
+void setListOfOperation(Operation operation);
 ```
-Give the example
-```
+Grâce à cette interface, nous allons implémenter deux classes:
+* `ClientAccount` implémentera les 3 premières méthodes;
+* `CurrentAccount` implémentera les autres.
+*jikgu
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
+### ClientAccount
 
 Explain what these tests test and why
 
