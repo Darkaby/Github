@@ -1,10 +1,13 @@
 # Project Java
 
-Programm de gestion d'une banque
+Programme de gestion d'une Banque
 
-## Getting Started
+## Préréquis
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Le code de gestion est séparer en trois modules distincts:
+* Le `logger` qui gère les messages à afficher en fonction de leur catégorie et historise les évènements;
+* Le `testframework` pour tester le code;
+* Le `banking` qui contient toues les méthodes de gestion de la banque;
 
 ### Prerequisites
 
