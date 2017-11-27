@@ -1,4 +1,4 @@
-# Project Java
+# Projet Java
 
 Programme de Gestion d'une Banque
 
@@ -9,13 +9,27 @@ Le code de gestion est séparer en trois modules distincts:
 * Le `testframework` pour tester le code;
 * Le `banking` qui contient toues les méthodes de gestion de la banque;
 
-## `Module Logger`
+## Module Logger
 
-What things you need to install the software and how to install them
+### Interface Logger
+
+Elle contient les méthodes de base ci-dessous. Ces dernières nous seront utiles plus tard pour
+définir la manière dont les messages seront affichés.
 
 ```
-Give examples
+void log (String message);
+void debug (String category, String message);
+void info (String category, String message);
+void error (String category, String message);
 ```
+* `debug` désigne un message adressé uniquement au créateur du programme;
+* `error` signale une erreur dans le programme;
+* `info` signale une information à l'attention de l'utilisateur ou du client.
+
+Le mot category est defini pour trois valeurs bien précises:
+* "OUTPUT": message affiché sur la console;
+* "INPUT": entrée de l'utilisateur;
+* "PROG": résultat du programme.
 
 ### Installing
 
