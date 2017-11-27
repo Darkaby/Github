@@ -16,7 +16,7 @@ Le code de gestion est séparer en trois modules distincts:
 Elle contient les méthodes de base ci-dessous. Ces dernières nous seront utiles plus tard pour
 définir la manière dont les messages seront affichés.
 
-```
+```java
 void log (String message);
 void debug (String category, String message);
 void info (String category, String message);
@@ -25,11 +25,34 @@ void error (String category, String message);
 * `debug` désigne un message adressé uniquement au créateur du programme;
 * `error` signale une erreur dans le programme;
 * `info` signale une information à l'attention de l'utilisateur ou du client.
+  Le mot category est defini pour trois valeurs bien précises:
+    * "OUTPUT": message affiché sur la console;
+    * "INPUT": entrée de l'utilisateur;
+    * "PROG": résultat du programme.
+    
+### ContextualLogger
 
-Le mot category est defini pour trois valeurs bien précises:
-* "OUTPUT": message affiché sur la console;
-* "INPUT": entrée de l'utilisateur;
-* "PROG": résultat du programme.
+C'est une implémentationde l'interface `logger` qui permet d'imprimer le message avec un format composé
+de l'annéee et de l'heure correspondant à l'appel d'une méthode, du nom de la classe et enfin du message.
+
+### FileLogger
+
+Cette classe permet de créér un fichier `FileLogger.txt` dans lequel sera historiser tous les évènemeents du programme.
+
+### CompositeLogger
+
+Ici, on détermine le format à adopter dans la console et dans le fichier FileLogger. Ainsi, toutes les sorties `OUPUT`
+qui permettent à l'utilisateur d'avancer dans le programme seront affichés dans la console sans mise en forme, et dans le fichier avec la mise en forme.
+Les catégories `INPUT` et `PROG` ne seront affichés que dans le fichier texte.
+
+### LoggerFactory
+
+C'est une autre instance de l'interface `logger` permettant de déclarer une nouvelle instance de la classe `CompositeLogger`.
+```java
+public static Logger getLogger(FileLogger fileLogger, ContextualLogger contextualLogger){
+        return new CompositeLogger(fileLogger, contextualLogger);
+    }
+```
 
 ### Installing
 
