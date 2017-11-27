@@ -72,15 +72,49 @@ void setListOfOperation(Operation operation);
 Grâce à cette interface, nous allons implémenter deux classes:
 * `ClientAccount` implémentera les 3 premières méthodes;
 * `CurrentAccount` implémentera les autres.
-*jikgu
 
 ### ClientAccount
 
-Explain what these tests test and why
+Cette classe nous permet de gérer le compte en banque d'un client. On pourra, pour un même client (nom, prénom et âge définis), créer plusieurs compte avec des soldes différents.
 
+```java
+public void transfert(CurrentAccount debitAccount, CurrentAccount creditAccount, double amount) {
 ```
-Give an example
+La somme `amount` est transférée du compte `debitAccount` vers le compte `creditAccount`, appartenant tous les deux au même client.
+
+```java
+public void setListOfAccount(CurrentAccount account)
 ```
+On construit une liste de comptes dont la taille s'agrandira au fur et à mesure, à chaque fois que le client créera un compte `account`. 
+
+```java
+public void getListOfAccountToString()
+```
+Afin que lors de ses opérations, l'utilisateur ait la possibilté de choisir sur le compte qu'il souhaite modifier, on affichera la liste des comptes disponibles.
+
+```java
+public CurrentAccount getAccount(int index)
+```
+Cette méthode permet de sélectionner le compte situer dans la liste decompte au numéro d'emplacement `index`.
+
+
+### Loaning
+
+La classe `Loaning` permet de définir les paramètres d'un prêt, de le calculer, et d'en afficher les caractéristiques:
+* Paramètres
+  * Taux annuel: devra être supérieur à 1;
+  * Durée du prêt: Dans la classe `CurrentAccount`, on la définit telle que n'amenant pas le demandeur du prêt à un âge supérieur ou égal à 70 ans;
+  * Montant à emprunter: Ne peut être ni négatif, ni nul.
+  
+* Caractéristiques
+  * Montant à rembourser par mois
+  
+
+### Operation
+
+Une opération ici est definit comme une action sur un compte pouvant être un retrait ou un dépôt. Elle a 3 paramètres:
+
+* 
 
 ### And coding style tests
 
