@@ -1,6 +1,6 @@
-# Project Title
+# Project Java
 
-One Paragraph of project description goes here
+Programm de gestion d'une banque
 
 ## Getting Started
 
