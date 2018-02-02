@@ -177,12 +177,11 @@ public class ChoiceAction {
                 "1 : Faire un dépôt; \n" +
                 "2 : Faire un retrait; \n" +
                 "3 : Demander un crédit; \n" +
-                "4 : Consulter le solde; \n" +
-                "5 : Voir la liste des opérations et consulter le solde; \n" +
-                "6 : Voir la liste des crédits; \n" +
-                "7 : Ouvrir un autre compte; \n" +
-                "8 : Faire un transfert; \n" +
-                "9 : Quitter la session.\n";
+                "4 : Voir la liste des opérations et consulter le solde; \n" +
+                "5 : Voir la liste des crédits; \n" +
+                "6 : Ouvrir un autre compte; \n" +
+                "7 : Faire un transfert; \n" +
+                "8 : Quitter la session.\n";
     }
 }
 ```
