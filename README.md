@@ -272,5 +272,5 @@ Les problèmes essentiels se sont surtout présentés au niveau de l'élaboratio
 ### Binôme
 ```
    TCHUENBOU KOMGUEP Gabrielle-Renée
-   FOGNO'O BOPDA Ulrich Ivanick
+   FOGNO BOPDA'A Ulrich Ivanick
 ```
