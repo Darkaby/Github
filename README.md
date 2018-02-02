@@ -181,7 +181,7 @@ public class ChoiceAction {
                 "5 : Voir la liste des crédits; \n" +
                 "6 : Ouvrir un autre compte; \n" +
                 "7 : Faire un transfert; \n" +
-                "8 : Quitter la session.\n";
+                "8 : Quitter.\n";
     }
 }
 ```
@@ -189,12 +189,18 @@ public class ChoiceAction {
 ### Bank
 
 Cette classe contient notre fonction main. La séquence d'action est effectuée comme suit:
-* Ouverture du programme et création d'un nouveau compte (nom, prénom, âge et solde);
-* Affichage de la liste d'actions et choix d'action du client;
-* Affichage de la liste des comptes et choix du compte du client;
-* En fonction du choix d'action de l'utilisateur définit par la classe `ChoiceAccount`, on appelle les classes et méthodes correspondantes;
-* Lorsque l'utilisateur quitte sa session, il a la possibilité d'en démarrer une nouvelle lui-même ou de laisser la place à un autre utilisateur, ou il peut quiter définitivement le programme.
+* Ouverture du programme et création d'un nouveau compte (nom, prénom, âge et solde): On met l'ensemble des commandes dans une méthode globale car on enaura de nouveau besoin lorsqu'on ouvrira une nouvelle session. 
+```java
+private static void NewClient()
+```
 
+* Affichage de la liste d'actions et choix d'action du client;
+```java
+compositeLogger.info("OUTPUT", listChoiceAction.toString());
+choiceAction = printInt("Que voulez-vous faire?");
+```
+
+* Affichage de la liste des comptes et choix du compte du client;
 ```java
 private static CurrentAccount ChooseAccount(){
         compositeLogger.info("OUTPUT","Choisir un compte: ");
@@ -204,6 +210,23 @@ private static CurrentAccount ChooseAccount(){
         return clientAccount.getAccount(choiceAccount.get());
     }
 ```
+
+* En fonction du choix d'action de l'utilisateur définit par la classe `ChoiceAccount`, on appelle les classes et méthodes correspondantes (Faire un retrait ou dépôt, demander un crédit, ...);
+
+* Lorsque l'utilisateur quitte sa session, il a la possibilité d'en démarrer une nouvelle lui-même ou de laisser la place à un autre utilisateur, ou il peut quiter définitivement le programme.
+```java
+compositeLogger.info("OUTPUT", "Quitter la session (0) ou Quitter le programme(1)?");
+int choice = scan.nextInt();
+if (choice==0){
+   NewClient();
+}
+else {
+   compositeLogger.info("OUTPUT", "\nMerci pour votre confiance et bonne journée!");
+   break;
+}
+```
+
+
 Cette méthode affiche la liste des comptes du client pour qu'il puisse faire un choix sur la suite des opérations.
 
 Nous avons définit trois autres méthodes plus bas permettant de demander à l'utilisateur d'entrer une valeur, puis de la lire et de l'enregistrer. Elles ne diffèrent qu'en fonction de la nature de l'entrée, selon que ce soit une chaîne de caractères, un integer, ou un double.
